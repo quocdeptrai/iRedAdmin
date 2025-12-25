@@ -38,6 +38,19 @@ services:
         condition: service_healthy
     environment:
       - PYTHONUNBUFFERED=1
+    volumes:
+      # Mount source code for development
+      - ./controllers:/opt/iredadmin/controllers
+      - ./libs:/opt/iredadmin/libs
+      - ./templates:/opt/iredadmin/templates
+      - ./static:/opt/iredadmin/static
+      - ./tools:/opt/iredadmin/tools
+      - ./i18n:/opt/iredadmin/i18n
+      - ./web:/opt/iredadmin/web
+      - ./iredadmin.py:/opt/iredadmin/iredadmin.py
+      - ./settings.py:/opt/iredadmin/settings.py
+      # Mount logs for debugging
+      - ./logs:/var/log/iredadmin
     networks:
       - app-network
 
