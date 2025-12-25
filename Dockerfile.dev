@@ -24,11 +24,6 @@ RUN pip install --no-cache-dir -r requirements.txt && \
 # Copy application files
 COPY . .
 
-# Create settings.py from template
-RUN cp settings.py.mysql.sample settings.py && \
-    sed -i "s/127.0.0.1/mariadb/g" settings.py && \
-    sed -i "s/'password'/'iredadmin_password'/g" settings.py
-
 # Create uwsgi config
 RUN cat > /opt/iredadmin/uwsgi.ini <<EOF
 [uwsgi]
