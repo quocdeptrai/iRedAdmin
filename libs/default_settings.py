@@ -9,7 +9,7 @@
 # --------------------------------------
 
 # Debug iRedAdmin: True, False.
-DEBUG = False
+DEBUG = True
 
 # Session timeout in seconds. Default is 30 minutes (1800 seconds).
 SESSION_TIMEOUT = 1800

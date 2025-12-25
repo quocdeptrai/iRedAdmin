@@ -60,8 +60,8 @@ services:
     environment:
       PMA_HOST: mariadb
       PMA_PORT: 3306
-      PMA_USER: iredadmin
-      PMA_PASSWORD: iredadmin_password
+      PMA_USER: root
+      PMA_PASSWORD: rootpassword
       MYSQL_ROOT_PASSWORD: rootpassword
       UPLOAD_LIMIT: 50M
     ports:

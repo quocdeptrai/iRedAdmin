@@ -7,7 +7,7 @@ from libs.default_settings import *
 # General settings.
 #
 # Site webmaster's mail address.
-webmaster = 'zhb@iredmail.org'
+webmaster = 'quocnguyen09092001@gmail.com'
 
 # Default language.
 default_language = 'en_US'
@@ -53,7 +53,7 @@ iredadmin_db_password = 'iredadmin_password'
 vmail_db_host = 'mariadb'
 vmail_db_port = 3306
 vmail_db_name = 'vmail'
-vmail_db_user = 'vmailadmin'
+vmail_db_user = 'iredadmin'
 vmail_db_password = 'iredadmin_password'
 
 ##############################################################################
@@ -71,7 +71,7 @@ amavisd_enable_logging = True
 amavisd_db_host = 'mariadb'
 amavisd_db_port = 3306
 amavisd_db_name = 'amavisd'
-amavisd_db_user = 'amavisd'
+amavisd_db_user = 'iredadmin'
 amavisd_db_password = 'iredadmin_password'
 
 # #### Quarantining ####
@@ -98,7 +98,7 @@ iredapd_enabled = True
 iredapd_db_host = 'mariadb'
 iredapd_db_port = 3306
 iredapd_db_name = 'iredapd'
-iredapd_db_user = 'iredapd'
+iredapd_db_user = 'iredadmin'
 iredapd_db_password = 'iredadmin_password'
 
 ##############################################################################
