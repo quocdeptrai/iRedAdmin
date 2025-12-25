@@ -1,3 +1,12 @@
+#use glob syntax.
 .DS_Store
 Dockerfile
 docker-compose.yml
+syntax: glob
+*.py[co]
+*.svn
+settings.ini
+settings.ini.bak
+.project
+.pydevproject
+.settings
