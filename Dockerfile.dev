@@ -1,0 +1,101 @@
+FROM python:3.11-slim
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libldap2-dev \
+    libsasl2-dev \
+    libssl-dev \
+    default-libmysqlclient-dev \
+    libpq-dev \
+    pkg-config \
+    nginx \
+    supervisor \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /opt/www/iredadmin
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir uwsgi
+
+# Copy application files
+COPY . .
+
+# Create settings.py from template
+RUN cp settings.py.mysql.sample settings.py && \
+    sed -i "s/127.0.0.1/mariadb/g" settings.py && \
+    sed -i "s/'password'/'iredadmin_password'/g" settings.py
+
+# Create uwsgi config
+RUN cat > /opt/www/iredadmin/uwsgi.ini <<EOF
+[uwsgi]
+chdir = /opt/www/iredadmin
+wsgi-file = iredadmin.py
+callable = application
+master = true
+processes = 4
+threads = 2
+socket = 127.0.0.1:7791
+protocol = uwsgi
+buffer-size = 8192
+vacuum = true
+die-on-term = true
+logto = /dev/stdout
+EOF
+
+# Create nginx config
+RUN cat > /etc/nginx/sites-available/default <<EOF
+upstream iredadmin {
+    server 127.0.0.1:7791;
+}
+
+server {
+    listen 80;
+    server_name _;
+    client_max_body_size 50M;
+
+    location /static/ {
+        alias /opt/www/iredadmin/static/;
+        expires 7d;
+        access_log off;
+    }
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass iredadmin;
+        uwsgi_read_timeout 300;
+    }
+}
+EOF
+
+# Create supervisor config
+RUN cat > /etc/supervisor/conf.d/iredadmin.conf <<EOF
+[supervisord]
+nodaemon=true
+user=root
+
+[program:nginx]
+command=/usr/sbin/nginx -g "daemon off;"
+autostart=true
+autorestart=true
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0
+
+[program:uwsgi]
+command=/usr/local/bin/uwsgi --ini /opt/www/iredadmin/uwsgi.ini
+autostart=true
+autorestart=true
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0
+EOF
+
+EXPOSE 80
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]

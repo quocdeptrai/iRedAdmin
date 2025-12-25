@@ -1,6 +1,9 @@
 # The core Python 3 micro web framework: https://webpy.org/
 web.py>=0.61
 
+# Required by web.py for file uploads
+python-multipart
+
 # HTML template engine.
 Jinja2>=2.2.0
 
@@ -11,7 +14,7 @@ python-ldap>=3.3.1
 PyMySQL>=0.9.3
 
 # PostgreSQL driver.
-psycopg2
+psycopg2-binary
 
 requests>=2.10.0
 
