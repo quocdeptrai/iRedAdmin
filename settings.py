@@ -44,8 +44,8 @@ max_passwd_length = 0
 iredadmin_db_host = 'mariadb'
 iredadmin_db_port = 3306
 iredadmin_db_name = 'iredadmin'
-iredadmin_db_user = 'iredadmin'
-iredadmin_db_password = 'iredadmin_password'
+iredadmin_db_user = 'iredmail_user'
+iredadmin_db_password = 'iredmail_user_password'
 
 ############################################
 # Database used to store mail accounts.
@@ -53,8 +53,8 @@ iredadmin_db_password = 'iredadmin_password'
 vmail_db_host = 'mariadb'
 vmail_db_port = 3306
 vmail_db_name = 'vmail'
-vmail_db_user = 'iredadmin'
-vmail_db_password = 'iredadmin_password'
+vmail_db_user = 'iredmail_user'
+vmail_db_password = 'iredmail_user_password'
 
 ##############################################################################
 # Settings used for Amavisd-new integration. Provides spam/virus quaranting,
@@ -71,8 +71,8 @@ amavisd_enable_logging = True
 amavisd_db_host = 'mariadb'
 amavisd_db_port = 3306
 amavisd_db_name = 'amavisd'
-amavisd_db_user = 'iredadmin'
-amavisd_db_password = 'iredadmin_password'
+amavisd_db_user = 'iredmail_user'
+amavisd_db_password = 'iredmail_user_password'
 
 # #### Quarantining ####
 # Release quarantined SPAM/Virus mails: True, False.
@@ -98,8 +98,8 @@ iredapd_enabled = True
 iredapd_db_host = 'mariadb'
 iredapd_db_port = 3306
 iredapd_db_name = 'iredapd'
-iredapd_db_user = 'iredadmin'
-iredapd_db_password = 'iredadmin_password'
+iredapd_db_user = 'iredmail_user'
+iredapd_db_password = 'iredmail_user_password'
 
 ##############################################################################
 # Settings used for mlmmj (mailing list manager) and mlmmjadmin integration.
