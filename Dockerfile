@@ -17,12 +17,12 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /opt/iredadmin
 
 # Copy requirements and install Python dependencies
-COPY requirements.txt .
+COPY iRedAdmin/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt && \
     pip install --no-cache-dir uwsgi
 
 # Copy application files
-COPY . .
+COPY iRedAdmin/ .
 
 # Create uwsgi config
 RUN cat > /opt/iredadmin/uwsgi.ini <<EOF
